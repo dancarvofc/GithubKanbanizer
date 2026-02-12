@@ -1,18 +1,18 @@
-# 🚀 GitHub Flow Kanban
+# 🚀 GitHub Kanbanizer
 
-A dynamic dashboard that transforms your static GitHub repository list into an interactive Kanban board. This project leverages the **GitHub REST API** to monitor real-time activity and automatically categorize projects based on their latest updates.
+A high-performance dashboard that transforms static GitHub repository lists into an interactive, professional Kanban board. **GitHub Kanbanizer** leverages the GitHub REST API to monitor real-time activity and automatically categorize projects based on their project maturity and latest updates.
 
 ---
 
 ## ✨ Key Features
 
-* **Automatic Sync:** Fetches all public repositories using the GitHub API.
-* **Smart Status Logic:**
-    * **In Progress (Doing):** Projects with commits in the last 30 days.
-    * **Backlog (To Do):** Active projects without recent updates (30-90 days).
+* **🔍 Dynamic Discovery:** Instantly generate a Kanban view for any GitHub profile.
+* **📊 Smart Status Logic:**
+    * **In Progress (Doing):** Projects with active commits in the last 30 days.
+    * **Backlog (To Do):** Projects without recent updates (30-90 days).
     * **Stable/Archived (Done):** Repositories with no activity for over 90 days or marked as `archived`.
-* **Metadata Badges:** Displays repository description, creation year, primary language, and direct links.
-* **Tech Stack:** React (Vite) + Node.js (Express) + Tailwind CSS.
+* **🏷️ Metadata Badges:** Displays repository description, birth year, primary language, and star count.
+* **⚡ Tech Stack:** React (Vite) + Node.js (Express) + Tailwind CSS + Framer Motion.
 
 ---
 
@@ -32,53 +32,58 @@ $$Status = Current Date - Last Push Date$$
 
 ### 1. Prerequisites
 * Node.js (v18 or higher)
-* A GitHub Personal Access Token (PAT)
+* GitHub Personal Access Token (Optional, for higher rate limits)
 
 ### 2. Clone the repository
 ```bash
-git clone [https://github.com/dancarvofc/github-kanban.git](https://github.com/dancarvofc/github-kanban.git)
-cd github-kanban
+git clone [https://github.com/dancarvofc/github-kanbanizer.git](https://github.com/dancarvofc/github-kanbanizer.git)
+cd github-kanbanizer
 ```
-3. Environment Variables
+### 3.  Environment Variables
 Create a .env file in the backend folder:
 
 Snippet de código
 PORT=3001
 GH_TOKEN=your_personal_access_token_here
-GH_USERNAME=dancarvofc
-4. Run the Project
-Backend:
+GH_USERNAME=your_username
 
+### 4. Run the Project
+---------------------
+Backend:
 ```bash
 cd backend
 npm install
 npm start
 Frontend:
 ```
+----------------------
 ```bash
 cd frontend
 npm install
 npm run dev
-📋 API Implementation Note
+```
+----------------------
+### 📋 API Implementation Note
+
 The project consumes the following endpoint:
 GET https://api.github.com/users/{username}/repos
-```
--------------------------------------------------------------------------------
+
 It maps the following JSON structure to the Kanban cards:
 
-name: Title
+name: Card Title
 
-description: Card content
+description: Project Summary
 
-created_at: Year tag
+created_at: Year Tag (extracted via getFullYear())
 
-language: Tech stack badge
+language: Tech Stack Badge
 
-html_url: Link to source
+html_url: Link to Source
 
--------------------------------------------------------------------------------
+pushed_at: Maturity Logic Trigger
 
+<div align="center">
  ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█
 ░▒▓█ ░▒▓█ ░▒▓█ ░▒▓█ 
-
-<h3>Developed by dancarvofc</h3>
+<h3>Developed by <a href="https://github.com/dancarvofc">dancarvofc</a></h3>
+</div>
