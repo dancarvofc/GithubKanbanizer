@@ -117,9 +117,9 @@ export default function Home(){
               </div>
 
               {activeTab === 'own' ? (
-                <Board title={`${username} — My Projects`} data={filteredColumns ?? ownData?.columns} loading={ownLoading} onOpenReadme={(owner, repo) => { setReadmeOwner(owner); setReadmeRepo(repo); setReadmeOpen(true) }} showForks={showForks} />
+                <Board title={`${username} — My Projects`} data={filteredColumns ?? ownData?.columns} loading={ownLoading} onOpenReadme={(owner: string, repo: string) => { setReadmeOwner(owner); setReadmeRepo(repo); setReadmeOpen(true) }} showForks={showForks} />
               ) : (
-                <Board title={`${username} — Starred Projects`} data={filteredColumns ?? starredData?.columns} loading={starredLoading} onOpenReadme={(owner, repo) => { setReadmeOwner(owner); setReadmeRepo(repo); setReadmeOpen(true) }} showForks={showForks} />
+                <Board title={`${username} — Starred Projects`} data={filteredColumns ?? starredData?.columns} loading={starredLoading} onOpenReadme={(owner: string, repo: string) => { setReadmeOwner(owner); setReadmeRepo(repo); setReadmeOpen(true) }} showForks={showForks} />
               )}
               
               

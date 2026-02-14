@@ -1,0 +1,26 @@
+classDiagram
+    direction LR
+    class Home {
+      +search(username)
+      +filters
+      +openReadme(owner,repo)
+    }
+    class Board {
+      +renderColumns()
+    }
+    class Column {
+      +renderCards()
+    }
+    class Card {
+      +openExternal()
+      +openReadme()
+    }
+    class ReadmeModal {
+      +fetchReadme()
+      +renderMarkdown()
+    }
+
+    Home --> Board
+    Board --> Column
+    Column --> Card
+    Card --> ReadmeModal

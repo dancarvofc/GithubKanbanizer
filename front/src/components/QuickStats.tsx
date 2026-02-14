@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function QuickStats({ stats }: { stats?: { stars?: number, forks?: number, watchers?: number, commitsYear?: number, topLanguage?: string, followers?: number } }){
+export default function QuickStats({ stats }: { stats?: { stars?: number, forks?: number, watchers?: number, commitsYear?: number, topLanguage?: string | null, followers?: number } }){
   if (!stats) return null
   return (
     <div className="card p-3 flex gap-4 items-center">
