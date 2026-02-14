@@ -7,6 +7,13 @@
   --accent: #06b6d4; /* cyan-500 */
 }
 
+/* Make selected buttons a bit bolder and ensure contrast */
+.selected-filter {
+  background-color: var(--accent) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
 html, body, #root { height: 100%; }
 
 /* ===== DARK THEME (DEFAULT) ===== */
@@ -114,4 +121,11 @@ html.light input::placeholder {
 html.light .pill {
   border-color: rgba(0,0,0,0.06);
 }
+
+/* Utility: hide scrollbar but allow scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
 

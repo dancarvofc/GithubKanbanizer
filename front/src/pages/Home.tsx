@@ -88,11 +88,16 @@ export default function Home(){
         ) : (
           <motion.div initial={{opacity:0}} animate={{opacity:1}}>
             {ownData?.user && (
-              <div className="mt-6 glass p-4 flex items-center gap-4 rounded">
-                <img src={ownData.user.avatar_url} alt={ownData.user.name || 'avatar'} className="w-16 h-16 rounded-full" />
+              <div className="mt-6 glass p-4 flex items-center justify-between gap-4 rounded">
+                <div className="flex items-center gap-4">
+                  <img src={ownData.user.avatar_url} alt={ownData.user.name || 'avatar'} className="w-16 h-16 rounded-full" />
+                  <div>
+                    <div className="font-semibold text-lg">{ownData.user.name || searchedUsername}</div>
+                    {ownData.user.bio && <div className="muted">{ownData.user.bio}</div>}
+                  </div>
+                </div>
                 <div>
-                  <div className="font-semibold text-lg">{ownData.user.name || searchedUsername}</div>
-                  {ownData.user.bio && <div className="muted">{ownData.user.bio}</div>}
+                  <button className="glass px-3 py-1" onClick={() => { setSearchedUsername(null); setQuery(''); setSelectedLanguage(null); setShowForks(true) }}>Change User</button>
                 </div>
               </div>
             )}
@@ -103,8 +108,11 @@ export default function Home(){
             </div>
 
               <div className="mt-6">
-              <div className="flex items-center justify-between gap-4 mb-4">
+              <div className="mb-3">
                 <Filters languages={languages} selectedLanguage={selectedLanguage} onSelectLanguage={setSelectedLanguage} showForks={showForks} onToggleForks={() => setShowForks(s=>!s)} />
+              </div>
+
+              <div className="flex items-center justify-between gap-4 mb-4">
                 <QuickStats stats={stats} />
               </div>
 
@@ -114,10 +122,7 @@ export default function Home(){
                 <Board title={`${username} — Starred Projects`} data={filteredColumns ?? starredData?.columns} loading={starredLoading} onOpenReadme={(owner, repo) => { setReadmeOwner(owner); setReadmeRepo(repo); setReadmeOpen(true) }} showForks={showForks} />
               )}
               
-              {/* Change user button */}
-              <div className="mt-4">
-                <button className="glass px-3 py-1" onClick={() => { setSearchedUsername(null); setQuery(''); setSelectedLanguage(null); setShowForks(true) }}>Change User</button>
-              </div>
+              
               <ReadmeModal open={readmeOpen} owner={readmeOwner} repo={readmeRepo} onClose={() => setReadmeOpen(false)} />
             </div>
           </motion.div>
