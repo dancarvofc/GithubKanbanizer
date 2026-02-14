@@ -1,10 +1,13 @@
 import { z } from 'zod';
 
-// Schema para os parâmetros da URL (o que vem depois de /kanban/)
+// `getKanbanParams` valida o parâmetro `:username` presente na URL.
+// Aqui garantimos que o cliente envie um username não-vazio.
 export const getKanbanParams = z.object({
   username: z.string().min(1),
 });
 
+// `repoCardSchema` descreve o formato do cartão que o frontend espera.
+// Mantemos apenas os campos necessários para a visualização Kanban.
 const repoCardSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -15,7 +18,9 @@ const repoCardSchema = z.object({
   is_fork: z.boolean(),
 });
 
-// O Schema que a rota usa para validar a resposta
+// `kanbanResponseSchema` é o formato completo retornado pela rota.
+// - `user`: informações do perfil (nome, avatar, bio)
+// - `columns`: três colunas com arrays de cards já mapeados
 export const kanbanResponseSchema = z.object({
   user: z.object({
     name: z.string().nullable(),
@@ -29,5 +34,6 @@ export const kanbanResponseSchema = z.object({
   })
 });
 
-// Isso cria um Tipo TypeScript real baseado no seu Zod Schema
+// Conveniência: cria um tipo TypeScript a partir do schema Zod.
+// Útil para tipar funções e garantir consistência entre validação e código.
 export type KanbanResponse = z.infer<typeof kanbanResponseSchema>;
