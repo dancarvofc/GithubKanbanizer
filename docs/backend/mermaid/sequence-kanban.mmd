@@ -1,0 +1,24 @@
+%% Diagrama de sequência (Mermaid) — criar cartão Kanban
+sequenceDiagram
+    participant Cliente
+    participant Server
+    participant Routes
+    participant Service
+    participant Provider
+    participant Cache
+    participant GitHub
+
+    Cliente->>Server: POST /kanban/cards {card}
+    Server->>Routes: encaminha request
+    Routes->>Service: validar e criarCard(data)
+    Service->>Cache: checa dados relacionados
+    alt cache miss
+        Service->>Provider: persistir no GitHub
+        Provider->>GitHub: requisição API
+        GitHub-->>Provider: resposta
+        Provider-->>Service: confirma persistência
+    end
+    Service->>Cache: atualiza cache
+    Service-->>Routes: retorna resultado
+    Routes-->>Server: monta resposta
+    Server-->>Cliente: 201 Created {card}

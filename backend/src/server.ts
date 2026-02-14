@@ -1,3 +1,11 @@
+// server.ts
+// Ponto de entrada do backend. Responsável por:
+// - carregar variáveis de ambiente
+// - inicializar a aplicação (registry de plugins/rotas)
+// - iniciar o servidor HTTP
+//
+// O propósito deste arquivo é deliberadamente pequeno: manter a inicialização
+// separada da lógica da aplicação para facilitar testes e leitura.
 import * as dotenv from 'dotenv';
 import { bootstrap } from './lib/app.js';
 
@@ -5,6 +13,9 @@ dotenv.config();
 
 const port = Number(process.env.PORT) || 3001;
 
+// Função que inicializa e sobe o servidor.
+// Mantemos o try/catch aqui para garantir que erros de startup
+// sejam reportados claramente e que o processo encerre em falha.
 async function start() {
   const app = await bootstrap();
 

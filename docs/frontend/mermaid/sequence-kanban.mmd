@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant U as User
+    participant H as Home (React)
+    participant Q as React Query
+    participant API as Backend API
+    participant G as GitHub (raw fallback)
+
+    U->>H: submit username
+    H->>Q: useKanban(username)
+    Q->>API: GET /kanban/:username
+    API-->>Q: kanban payload
+    Q-->>H: cached response
+    H->>H: calculate languages/stats
+    H->>Board: render columns
+
+    U->>Card: click README
+    Card->>H: request openReadme(owner,repo)
+    H->>API: GET /readme?owner=&repo=
+    API-->>H: raw markdown OR error
+    alt if error
+      H->>G: try raw.githubusercontent URL(s)
+      G-->>H: raw markdown or 404
+    end
+    H->>ReadmeModal: render markdown

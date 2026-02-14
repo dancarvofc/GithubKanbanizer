@@ -1,0 +1,30 @@
+%% Diagrama de classes (Mermaid)
+classDiagram
+    class Server {
+        +start()
+    }
+    class App {
+        +init()
+    }
+    class Cache {
+        +get(key)
+        +set(key, value)
+    }
+    class GithubProvider {
+        +request(path, opts)
+    }
+    class KanbanService {
+        +getBoard()
+        +createCard(data)
+    }
+    class KanbanRoutes {
+        +register(server)
+    }
+    class KanbanSchema
+
+    Server --> App
+    App --> KanbanRoutes
+    KanbanRoutes --> KanbanService
+    KanbanService --> GithubProvider
+    KanbanService --> Cache
+    KanbanService .. KanbanSchema : usa
