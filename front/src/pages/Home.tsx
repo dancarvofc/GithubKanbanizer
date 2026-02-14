@@ -22,7 +22,7 @@ export default function Home(){
 
   return (
     <div className="min-h-screen">
-      <Header onThemeToggle={() => { document.documentElement.classList.toggle('light') }} />
+      <Header onThemeToggle={() => { (window as any).toggleTheme?.() }} />
 
       <div className="container mx-auto p-4">
         {!searchedUsername ? (
@@ -46,8 +46,8 @@ export default function Home(){
             )}
 
             <div className="mt-4 flex gap-2">
-              <button onClick={() => setActiveTab('own')} className={`px-3 py-1 rounded ${activeTab==='own'? 'bg-sky-600 text-white' : 'glass'}`}>My Repos</button>
-              <button onClick={() => setActiveTab('starred')} className={`px-3 py-1 rounded ${activeTab==='starred'? 'bg-sky-600 text-white' : 'glass'}`}>Starred</button>
+              <button onClick={() => setActiveTab('own')} style={{backgroundColor: activeTab === 'own' ? 'var(--accent)' : undefined}} className={`px-3 py-1 rounded ${activeTab==='own'? 'text-white' : 'glass'}`}>My Repos</button>
+              <button onClick={() => setActiveTab('starred')} style={{backgroundColor: activeTab === 'starred' ? 'var(--accent)' : undefined}} className={`px-3 py-1 rounded ${activeTab==='starred'? 'text-white' : 'glass'}`}>Starred</button>
             </div>
 
             <div className="mt-6">
